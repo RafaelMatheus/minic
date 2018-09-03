@@ -6,8 +6,6 @@ public class Token {
 	private int linha;
 	private int coluna;
 
-	// Construtor
-
 	public Token(String tipo, int linha, int coluna, String lexema) {
 
 		this.tipo = tipo;
