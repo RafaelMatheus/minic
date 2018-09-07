@@ -7,10 +7,11 @@ public class GeradorClassesJFlex {
 	public static void main(String[] args) {
 		String file = new File("").getAbsolutePath()
 				+ "\\src\\main\\resources\\especificacoes\\"
-				+ "ExtratorLiteraisNumericosPalavras.lex";
+				+ "MiniC.lex";
 
-		jflex.Main.generate(new File(file));
-
+		//jflex.Main.generate(new File(file));
+		System.out.println(file);
+		
 	}
 
 }

@@ -12,16 +12,16 @@ public class ExtratorLiteraisNumericosPalavrasApp {
 
   public static void main(String[] args)  {
 
-    FileReader arquivoTeste;
+    FileReader programaTeste;
     String path = new File("").getAbsolutePath()+
     	"\\src\\main\\resources\\programa\\"
-		+ "ExtratorLiteraisNumericosPalavras.txt";
+		+ "ProgramaTeste.txt";
 	
     try {
-		arquivoTeste = new FileReader(path);
+		programaTeste = new FileReader(path);
 		
 		
-		IdentificadorMinic analisador = new IdentificadorMinic(arquivoTeste);
+		AnalisadorLexico analisador = new AnalisadorLexico(programaTeste);
 		Token token =   analisador.yylex();
 		while(token != null) {
 			  
