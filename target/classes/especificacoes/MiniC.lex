@@ -54,8 +54,8 @@ COMENTARIO = {TRADITIONALCOMMENT} | {ENDOFLINECOMMENT} | {DOCUMENTATIONCOMMENT}
 %%
 
 "main" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
-"{" { return new Token( "Abre_parentese", yyline, yycolumn, yytext() ); }
-"}" { return new Token( "Fecha_parentese", yyline, yycolumn, yytext() ); }
+"{" { return new Token( "Abre_colchetes", yyline, yycolumn, yytext() ); }
+"}" { return new Token( "Fecha_colchetes", yyline, yycolumn, yytext() ); }
 "(" { return new Token( "Abre_parentese", yyline, yycolumn, yytext() ); }
 ")" { return new Token( "Fecha_parentese", yyline, yycolumn, yytext() ); }
 "void" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
