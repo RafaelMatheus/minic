@@ -1,7 +1,7 @@
 <h4>Construção de compiladores</h4>
 
 <ul>
-  <li>Rafael Matheus Pereira de Castro</li>
-  <li>Alvaro Philipe Andrade dos Santos</li>
-  <li>Isis Angelis Pereira da Silva</li>
+  <li>Rafael Matheus Pereira De Castro, 1610014657</li>
+  <li>Alvaro Philipe Andrade Dos Santos, 1610015475</li>
+  <li>Isis Angelis Da Silva, 1720020519</li>
 </ul>
