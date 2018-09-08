@@ -1,7 +1,6 @@
+package app;
 
-package br.com.minic.analisadorlexico;
-
-import br.com.minic.token.Token;
+import model.Token;
 
 %%
 
@@ -11,20 +10,54 @@ import br.com.minic.token.Token;
 %line
 %column
 
-LETRA = [a-zA-Z]
-DIGITO = [0-9]
-FINAL_LINHA = (\r | \n | \r\n | \t)
-ESPACO_EM_BRANCO = [ ]
+NOVALINHA = \n | \r\n | \t\n
+DIGITO = [0-9] 
+LETRA = [A-Za-z]
+PALAVRA = {LETRA}+
 
-LITERAL_INTEIRO = {DIGITO}+
+SIMBOLO = "|"
+SIMBOLO1 = "=="
+SIMBOLO2 = "!="
+SIMBOLO3 = "<"
+SIMBOLO4 = ">"
+SIMBOLO5 = "<="
+SIMBOLO6 = ">="
+SIMBOLO7 = "+"
+SIMBOLO8 = "-"
+SIMBOLO9 = "*"
+SIMBOLO10 = "/"
+
+IDENTIFICADOR = ({LETRA}|_)({LETRA}|{DIGITO}|_)*
+LITERALINTEIRO = {DIGITO}+
+LITERALPONTOFLUTUANTE = ({DIGITO}+\.{DIGITO}+)
+
+LITERALCARACTER = '([^'\\n]|\\.)'
+LITERALSTRING = \"(([^\"]|\\\")*[^\\])?\"
+
+OPERADORARITMETICO = ({SIMBOLO7} | {SIMBOLO8} | {SIMBOLO9} | {SIMBOLO10})
+OPERADORCOMPARACAO = ({SIMBOLO1} | {SIMBOLO2} | {SIMBOLO3} | {SIMBOLO4} | {SIMBOLO5} | {SIMBOLO6})
+OPERADORLOGICOAND = (&(&))
+OPERADORLOGICOOR = ({SIMBOLO}{SIMBOLO})
+OPERADORATRIBUICAO = [=]
+OPERADORUNARIONEGACAO = [!]
+
+SIMBOLODEPONTUACAO = [:;,(){}.#&]
+
+INPUTCHARACTER = [^\r\n]
+LINETERMINATOR = \r|\n|\r|\n
+TRADITIONALCOMMENT = "/*" [^*] ~"*/" | "/*" "*"+ "/"
+ENDOFLINECOMMENT = "//" {INPUTCHARACTER}* {LINETERMINATOR}?
+DOCUMENTATIONCOMMENT = "/**" {COMMENTCONTENT} "*"+ "/"
+COMMENTCONTENT = ( [^*] | \*+ [^/*])*
+COMENTARIO = {TRADITIONALCOMMENT} | {ENDOFLINECOMMENT} | {DOCUMENTATIONCOMMENT}
 
 %%
 
 "main" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
-"{" { return new Token( "AP", yyline, yycolumn, yytext() ); }
-"}" { return new Token( "FP", yyline, yycolumn, yytext() ); }
-"(" { return new Token( "AP", yyline, yycolumn, yytext() ); }
-")" { return new Token( "FP", yyline, yycolumn, yytext() ); }
+"{" { return new Token( "Abre_parentese", yyline, yycolumn, yytext() ); }
+"}" { return new Token( "Fecha_parentese", yyline, yycolumn, yytext() ); }
+"(" { return new Token( "Abre_parentese", yyline, yycolumn, yytext() ); }
+")" { return new Token( "Fecha_parentese", yyline, yycolumn, yytext() ); }
 "void" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
 "int" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
 "float" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
@@ -44,9 +77,20 @@ LITERAL_INTEIRO = {DIGITO}+
 "include" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
 
 
-{LITERAL_INTEIRO} { return new Token( "LITERAL_INTEIRO", yyline, yycolumn, yytext() ); }
+{IDENTIFICADOR} { return new Token("IDENTIFICADOR", yyline, yycolumn, yytext() ); }
+{LITERALINTEIRO} { return new Token("LITERALINTEIRO", yyline, yycolumn, yytext() ); }
+{LITERALPONTOFLUTUANTE} { return new Token("LITERALPONTOFLUTUANTE",yyline, yycolumn, yytext()); }
+{LITERALCARACTER} { return new Token("LITERALCARACTER",yyline, yycolumn, yytext() ); }
 
-{FINAL_LINHA} {}
-{ESPACO_EM_BRANCO} {}
+{LITERALSTRING} { return new Token("LITERALSTRING", yyline, yycolumn, yytext()); }
 
-. { return new Token( "ERRO", yyline, yycolumn, yytext() ); }
+{OPERADORARITMETICO} {return new Token("OPERADORARITMETICO",yyline, yycolumn, yytext() ); }
+{OPERADORCOMPARACAO} { return new Token("OPERADORCOMPARACAO", yyline, yycolumn, yytext() ); }
+{OPERADORLOGICOAND} { return new Token("OPERADORLOGICOAND",yyline, yycolumn, yytext() ); }
+{OPERADORLOGICOOR} { return new Token("OPERADORLOGICOOR",yyline, yycolumn, yytext() ); }
+{OPERADORATRIBUICAO} { return new Token("OPERADORATRIBUICAO", yyline, yycolumn, yytext() ); }
+{OPERADORUNARIONEGACAO} { return new Token("OPERADORUNARIONEGACAO",yyline, yycolumn, yytext() ); }
+{SIMBOLODEPONTUACAO} {return new Token("SIMBOLODEPONTUACAO",yyline, yycolumn, yytext() ); }
+{COMENTARIO} { }
+{NOVALINHA} { /**/ }
+. { }

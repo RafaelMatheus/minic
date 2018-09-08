@@ -8,7 +8,7 @@ import model.Token;
 
 
 
-public class ExtratorLiteraisNumericosPalavrasApp {
+public class MiniCApp {
 
   public static void main(String[] args)  {
 
