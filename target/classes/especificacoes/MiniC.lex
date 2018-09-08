@@ -15,18 +15,6 @@ DIGITO = [0-9]
 LETRA = [A-Za-z]
 PALAVRA = {LETRA}+
 
-SIMBOLO = "|"
-SIMBOLO1 = "=="
-SIMBOLO2 = "!="
-SIMBOLO3 = "<"
-SIMBOLO4 = ">"
-SIMBOLO5 = "<="
-SIMBOLO6 = ">="
-SIMBOLO7 = "+"
-SIMBOLO8 = "-"
-SIMBOLO9 = "*"
-SIMBOLO10 = "/"
-
 IDENTIFICADOR = ({LETRA}|_)({LETRA}|{DIGITO}|_)*
 LITERALINTEIRO = {DIGITO}+
 LITERALPONTOFLUTUANTE = ({DIGITO}+\.{DIGITO}+)
@@ -34,10 +22,10 @@ LITERALPONTOFLUTUANTE = ({DIGITO}+\.{DIGITO}+)
 LITERALCARACTER = '([^'\\n]|\\.)'
 LITERALSTRING = \"(([^\"]|\\\")*[^\\])?\"
 
-OPERADORARITMETICO = ({SIMBOLO7} | {SIMBOLO8} | {SIMBOLO9} | {SIMBOLO10})
-OPERADORCOMPARACAO = ({SIMBOLO1} | {SIMBOLO2} | {SIMBOLO3} | {SIMBOLO4} | {SIMBOLO5} | {SIMBOLO6})
+OPERADORARITMETICO = ("+ "|" - "|" * "|" /" )
+OPERADORCOMPARACAO = ("== "| "!= "|" <" |" >" | "<= "|" >=")
 OPERADORLOGICOAND = (&(&))
-OPERADORLOGICOOR = ({SIMBOLO}{SIMBOLO})
+OPERADORLOGICOOR = ("||")
 OPERADORATRIBUICAO = [=]
 OPERADORUNARIONEGACAO = [!]
 
@@ -51,8 +39,8 @@ DOCUMENTATIONCOMMENT = "/**" {COMMENTCONTENT} "*"+ "/"
 COMMENTCONTENT = ( [^*] | \*+ [^/*])*
 COMENTARIO = {TRADITIONALCOMMENT} | {ENDOFLINECOMMENT} | {DOCUMENTATIONCOMMENT}
 
-%%
 
+%%
 "main" { return new Token( "Palavra_Reservada", yyline, yycolumn, yytext() ); }
 "{" { return new Token( "Abre_colchetes", yyline, yycolumn, yytext() ); }
 "}" { return new Token( "Fecha_colchetes", yyline, yycolumn, yytext() ); }
@@ -81,9 +69,7 @@ COMENTARIO = {TRADITIONALCOMMENT} | {ENDOFLINECOMMENT} | {DOCUMENTATIONCOMMENT}
 {LITERALINTEIRO} { return new Token("LITERALINTEIRO", yyline, yycolumn, yytext() ); }
 {LITERALPONTOFLUTUANTE} { return new Token("LITERALPONTOFLUTUANTE",yyline, yycolumn, yytext()); }
 {LITERALCARACTER} { return new Token("LITERALCARACTER",yyline, yycolumn, yytext() ); }
-
 {LITERALSTRING} { return new Token("LITERALSTRING", yyline, yycolumn, yytext()); }
-
 {OPERADORARITMETICO} {return new Token("OPERADORARITMETICO",yyline, yycolumn, yytext() ); }
 {OPERADORCOMPARACAO} { return new Token("OPERADORCOMPARACAO", yyline, yycolumn, yytext() ); }
 {OPERADORLOGICOAND} { return new Token("OPERADORLOGICOAND",yyline, yycolumn, yytext() ); }
