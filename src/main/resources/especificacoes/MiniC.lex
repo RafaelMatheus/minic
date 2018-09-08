@@ -22,8 +22,8 @@ LITERALPONTOFLUTUANTE = ({DIGITO}+\.{DIGITO}+)
 LITERALCARACTER = '([^'\\n]|\\.)'
 LITERALSTRING = \"(([^\"]|\\\")*[^\\])?\"
 
-OPERADORARITMETICO = ("+ "|" - "|" * "|" /" )
-OPERADORCOMPARACAO = ("== "| "!= "|" <" |" >" | "<= "|" >=")
+OPERADORARITMETICO = ("+"|"-"|"*"|"/" )
+OPERADORCOMPARACAO = ("=="| "!="|"<" |">" | "<="|">=")
 OPERADORLOGICOAND = (&(&))
 OPERADORLOGICOOR = ("||")
 OPERADORATRIBUICAO = [=]
